@@ -1,0 +1,54 @@
+<!Result HTML to display the Result Table>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>CPU Scheduling Website - Results</title>
+</head>
+<body>
+ <h1>CPU Scheduling Results</h1>
+ <p>Algorithm: {{ algorithm }}</p>
+ <p>Number of Processes: {{ n }}</p>
+ <p>Time Quantum: {{ time_quantum }}</p>
+ <h2>Result Table</h2>
+ <table border="1">
+ <thead>
+ <tr>
+ <th>Process ID</th>
+ <th>Arrival Time</th>
+ <th>Burst Time</th>
+ <th>Priority</th>
+ <th>Completion Time</th>
+ <th>TurnAround Time</th>
+ <th>Waiting Time</th>
+ </tr>
+ </thead>
+ <tbody>
+ <tr>
+ {% for line in result.split('\n')[:-1] %}
+ {% set values = line.split(' ') %}
+ <tr>
+ <td>{{ values[0] }}</td>
+ <td>{{ values[1] }}</td>
+ <td>{{ values[2] }}</td>
+ <td>{{ values[3] }}</td>
+ <td>{{ values[4] }}</td>
+ <td>{{ values[5] }}</td>
+ <td>{{ values[6] }}</td>
+ </tr>
+ {% endfor %}
+ </tr>
+ </tbody>
+ </table>
+ <br>
+ <button onclick="goBack()">Go Back</button>
+ <script>
+ function goBack() {
+ window.history.back();
+ }
+ </script>
+</body>
+</html>

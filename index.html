@@ -1,0 +1,137 @@
+<!HTML/CSS File For Frontend>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>CPU Scheduling Website</title>
+ <style>
+ body {
+ font-family: 'Arial', sans-serif;
+ background-color: #f4f4f4;
+ margin: 20px;
+ }
+ h1 {
+ color: #333;
+ text-align: center;
+ }
+ form {
+ max-width: 1000px;
+ margin: 20px auto;
+ background-color: #fff;
+ padding: 20px;
+ border-radius: 8px;
+ box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+ }
+ select, input, table {
+ margin-bottom: 10px;
+ }
+ table {
+ width: 80%;
+ border-collapse: collapse;
+ }
+ th, td {
+ padding: 8px;
+ border: 1px solid #ddd;
+ text-align: center;
+ }
+ input[type="submit"] {
+ background-color: #4caf50;
+ color: white;
+ padding: 10px 15px;
+ border: none;
+ border-radius: 4px;
+ cursor: pointer;
+ }
+ input[type="submit"]:hover {
+ background-color: #45a049;
+ }
+ @media only screen and (max-width: 600px) {
+ form {
+ max-width: 100%;
+ }
+ }
+ </style>
+</head>
+<body>
+ <h1>CPU Scheduling Website</h1>
+ <form id="schedulerForm" action="/" method="post"
+onsubmit="handleFormSubmit(); return false;">
+ <select name="algorithm" id="algorithmSelect"
+onchange="toggleTimeQuantumInput()">
+ <option value="fcfs">First Come First Served (FCFS)</option>
+ <option value="sjf">Shortest Job First (SJF)</option>
+ <option value="priority">Priority Scheduling</option>
+ <option value="round_robin">Round Robin</option>
+ </select>
+ <br>
+ Number of Patients: <input type="number" name="n" id="n"
+oninput="generateProcessTable()">
+ <br>
+ <div id="timeQuantumInput" style="display: none;">
+ Time quantum for round robin: <input type="number"
+name="time_quantum">
+ </div>
+ <br>
+ Arrival times and burst times of processes:
+ <table border="1" id="processTable">
+ <tr>
+ <th>Process ID</th>
+ <th>Arrival Time</th>
+ <th>Burst Time</th>
+ <th>Priority</th>
+ </tr>
+ </table>
+ <br>
+ <input type="submit" value="Schedule">
+ </form>
+ <div id="resultTableSection">
+ </div>
+ <script>
+ function generateProcessTable() {
+ const n = document.getElementById('n').value;
+ const processTable = document.getElementById('processTable');
+ while (processTable.rows.length > 1) {
+ processTable.deleteRow(1);
+ }
+ for (let i = 1; i <= n; i++) {
+ const row = processTable.insertRow(-1);
+ row.insertCell(0).innerText = i;
+ const arrivalCell = row.insertCell(1);
+ arrivalCell.innerHTML = `<input type="number"
+name="arrival_time_${i}">`;
+ const burstCell = row.insertCell(2);
+ burstCell.innerHTML = `<input type="number"
+name="burst_time_${i}">`;
+ const priorityCell = row.insertCell(3);
+ priorityCell.innerHTML = `<input type="number"
+name="priority_${i}">`;
+ }
+ }
+ function handleFormSubmit() {
+ const form = document.getElementById('schedulerForm');
+ fetch(form.action, {
+ method: form.method,
+ body: new FormData(form),
+ })
+ .then(response => response.text())
+ .then(htmlResult => {
+ // Display the result table section
+ document.getElementById('resultTableSection').innerHTML =
+htmlResult;
+ })
+ .catch(error => {
+ console.error('Error:', error);
+ });
+ }
+ function toggleTimeQuantumInput() {
+ var algorithmSelect = document.getElementById("algorithmSelect");
+ var timeQuantumInput =
+document.getElementById("timeQuantumInput");
+ timeQuantumInput.style.display = (algorithmSelect.value ===
+"round_robin") ? "block" : "none";
+ }
+ </script>
+</body>
+</html>

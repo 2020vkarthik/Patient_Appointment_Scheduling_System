@@ -25,7 +25,7 @@ The general wait time is quite high because of the modus operandi that FCFS foll
 The algorithm is feasible to use and implement in the long run.
 The process is not very complicated, thus easy to understand.
 Every implementation follows the First In First Out (FIFO) ready queue.
-Benefits of FCFS Scheduling
+## Benefits of FCFS Scheduling
 The algorithm is easy to understand and implement.
 The process is simple, thus easy to handle and comprehend.
 FCFS is a very fair algorithm since no priority is involved- the process that comes first gets served first.
@@ -34,7 +34,7 @@ FCFS doesn’t lead to any starvation.
 The scheduling is non-preemptive. Thus, no project gets paused.
 It is the most simplified form of CPU scheduling algorithm- easy to program and operate.
 The FCFS algorithm is better for the processes with comparatively large burst time since it involves no context switch between the processes.
-Limitations of FCFS Scheduling
+## Limitations of FCFS Scheduling
 The FCFS method is poor in performance.
 Its general wait time gets too high due to the non-preemptive scheduling.
 Once a process gets allocated to the CPU, it never releases the CPU until the end of execution.

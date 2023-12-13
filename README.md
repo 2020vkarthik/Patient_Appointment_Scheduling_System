@@ -3,7 +3,7 @@ This is based on various CPU scheduling algorithm. It provides the insight of wh
 patient appointment scenario. we could see the appointment issuing order for the given patient list and their info.
 
 # Algorithms used-
-_ FCFS
- SJF
- Priority
- Round Robin
+1. FCFS
+1. SJF
+1. Priority
+1. Round Robin
